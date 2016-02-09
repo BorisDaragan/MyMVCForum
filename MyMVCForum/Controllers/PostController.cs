@@ -39,8 +39,15 @@ namespace MyMVCForum.Controllers
         // GET: /Post/Create
         public ActionResult Create()
         {
-            ViewBag.TopicRefID = new SelectList(db.Topics, "TopicID", "TopicName");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.TopicRefID = new SelectList(db.Topics, "TopicID", "TopicName");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         // POST: /Post/Create
@@ -56,7 +63,7 @@ namespace MyMVCForum.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+                
             ViewBag.TopicRefID = new SelectList(db.Topics, "TopicID", "TopicName", post.TopicRefID);
             return View(post);
         }

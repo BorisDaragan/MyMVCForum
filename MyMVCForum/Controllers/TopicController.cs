@@ -38,7 +38,14 @@ namespace MyMVCForum.Controllers
         // GET: /Topic/Create
         public ActionResult Create()
         {
+            if (User.Identity.IsAuthenticated)
+            {
             return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         // POST: /Topic/Create
@@ -54,7 +61,6 @@ namespace MyMVCForum.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(topic);
         }
 

@@ -15,5 +15,11 @@ namespace MyMVCForum.Models
 
         [ForeignKey("TopicRefID")]
         public virtual Topic Topic { get; set; }
+        public DateTime DateTopic { get; set; }
+
+        public Post()
+        {
+            DateTopic = DateTime.Now;
+        }
     }
 }

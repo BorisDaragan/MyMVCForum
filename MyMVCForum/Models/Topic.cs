@@ -11,5 +11,12 @@ namespace MyMVCForum.Models
         public string TopicName { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+
+        public DateTime DatePost { get; set; }
+
+        public Topic()
+        {
+            DatePost = DateTime.Now;
+        }
     }
 }

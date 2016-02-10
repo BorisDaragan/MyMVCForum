@@ -11,7 +11,8 @@ using Microsoft.AspNet.Identity;
 
 namespace MyMVCForum.Controllers
 {
-    public class TopicController : Controller
+
+    public class TopicTestController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -40,7 +41,7 @@ namespace MyMVCForum.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+                return View();
         }
 
         // POST: /Topic/Create
@@ -49,11 +50,11 @@ namespace MyMVCForum.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="TopicID,TopicName")] Topic topic)
+        public ActionResult Create([Bind(Include = "TopicID,TopicName")] Topic topic)
         {
             if (ModelState.IsValid)
             {
-                topic.AuthorTopicId = User.Identity.GetUserId(); 
+                topic.AuthorTopicId = User.Identity.GetUserId();
                 db.Topics.Add(topic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,7 +82,7 @@ namespace MyMVCForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="TopicID,TopicName")] Topic topic)
+        public ActionResult Edit([Bind(Include = "TopicID,TopicName")] Topic topic)
         {
             if (ModelState.IsValid)
             {

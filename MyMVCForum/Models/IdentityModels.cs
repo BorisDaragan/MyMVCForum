@@ -18,5 +18,6 @@ namespace MyMVCForum.Models
         public System.Data.Entity.DbSet<MyMVCForum.Models.Post> Posts { get; set; }
 
         public System.Data.Entity.DbSet<MyMVCForum.Models.Topic> Topics { get; set; }
+
     }
 }

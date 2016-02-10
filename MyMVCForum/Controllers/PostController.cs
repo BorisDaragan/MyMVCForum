@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MyMVCForum.Models;
 using Microsoft.AspNet.Identity;
@@ -38,17 +34,11 @@ namespace MyMVCForum.Controllers
         }
 
         // GET: /Post/Create
+        [Authorize]
         public ActionResult Create()
         {
-            if (User.Identity.IsAuthenticated)
-            {
                 ViewBag.TopicRefID = new SelectList(db.Topics, "TopicID", "TopicName");
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
         }
 
         // POST: /Post/Create
@@ -56,6 +46,7 @@ namespace MyMVCForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include="PostID,PostText,TopicRefID")] Post post)
         {
             if (ModelState.IsValid)

@@ -162,6 +162,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\TopicTestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,6 +262,11 @@
     <Content Include="Views\Topic\Details.cshtml" />
     <Content Include="Views\Topic\Edit.cshtml" />
     <Content Include="Views\Topic\Index.cshtml" />
+    <Content Include="Views\TopicTest\Create.cshtml" />
+    <Content Include="Views\TopicTest\Delete.cshtml" />
+    <Content Include="Views\TopicTest\Details.cshtml" />
+    <Content Include="Views\TopicTest\Edit.cshtml" />
+    <Content Include="Views\TopicTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

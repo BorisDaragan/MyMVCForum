@@ -12,10 +12,11 @@ namespace MyMVCForum.Models
 
         [Required]
         public string TopicName { get; set; }
+        public DateTime DatePost { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
 
-        public DateTime DatePost { get; set; }
+
 
         public Topic()
         {

@@ -13,13 +13,19 @@ namespace MyMVCForum.Models
 
         [Required]
         public string PostText { get; set; }
+        public DateTime DateTopic { get; set; }
+
 
         [Required]
         public virtual int TopicRefID { get; set; }
 
         [ForeignKey("TopicRefID")]
         public virtual Topic Topic { get; set; }
-        public DateTime DateTopic { get; set; }
+
+        public virtual string AuthorPostId { get; set; }
+
+        [ForeignKey("AuthorPostId")]
+        public virtual ApplicationUser AuthorPost { get; set; }
 
         public Post()
         {

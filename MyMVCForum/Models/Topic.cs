@@ -11,8 +11,11 @@ namespace MyMVCForum.Models
     {
         public int TopicID { get; set; }
 
+        [Display(Name = "Title")]
         [Required]
         public string TopicName { get; set; }
+
+        [Display(Name = "Created")]
         public DateTime DatePost { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }

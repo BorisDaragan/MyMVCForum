@@ -14,7 +14,12 @@
         <th>
             @Html.DisplayNameFor(model => model.TopicName)
         </th>
-        <th></th>
+        <th>
+            Author
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePost)
+        </th>
     </tr>
 
     @foreach (var item in Model)

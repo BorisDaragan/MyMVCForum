@@ -1,28 +1,29 @@
-﻿@model MyMVCForum.Models.Topic
+﻿@model MyMVCForum.Models.Post
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Reply";
 }
 
-<h2>Create</h2>
+<h2>Reply</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Topic</h4>
+        <h4>Post</h4>
         <hr />
-        @Html.ValidationSummary(true)
+        @*@Html.ValidationSummary(true)*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TopicName, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PostText, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TopicName)
-                @Html.ValidationMessageFor(model => model.TopicName)
+                @Html.EditorFor(model => model.PostText)
+                @*@Html.ValidationMessageFor(model => model.PostText)*@
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -33,7 +34,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to topic", "Index", new { id = ViewBag.TopicId })
 </div>
 
 @section Scripts {

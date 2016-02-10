@@ -16,7 +16,6 @@ namespace MyMVCForum.Models
         public DateTime DateTopic { get; set; }
 
 
-        [Required]
         public virtual int TopicRefID { get; set; }
 
         [ForeignKey("TopicRefID")]

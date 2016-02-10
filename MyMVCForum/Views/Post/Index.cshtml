@@ -27,7 +27,13 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PostText)
-        </td>
+        </td>        
+        @*test GetUserId*@
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorPost.UserName)
+        </td>  
+
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PostID }) |
             @Html.ActionLink("Details", "Details", new { id=item.PostID }) |
@@ -35,5 +41,6 @@
         </td>
     </tr>
 }
+
 
 </table>

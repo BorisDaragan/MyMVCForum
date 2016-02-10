@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyMVCForum.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MyMVCForum.Controllers
 {
@@ -59,6 +60,7 @@ namespace MyMVCForum.Controllers
         {
             if (ModelState.IsValid)
             {
+                post.AuthorPostId = User.Identity.GetUserId(); 
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");

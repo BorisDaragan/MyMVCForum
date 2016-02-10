@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,11 +13,16 @@ namespace MyMVCForum.Models
 
         [Required]
         public string TopicName { get; set; }
+        public DateTime DatePost { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
 
-        public DateTime DatePost { get; set; }
 
+
+        public virtual string AuthorTopicId { get; set; }
+
+        [ForeignKey("AuthorTopicId")]
+        public virtual ApplicationUser AuthorTopic { get; set; }
         public Topic()
         {
             DatePost = DateTime.Now;

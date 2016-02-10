@@ -30,6 +30,35 @@ namespace MyMVCForum.Controllers
             return View(topic);
         }
 
+        // GET: /Topic/Create
+        [Authorize]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /Topic/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "TopicID,TopicName")] Topic topic)
+        {
+            if (ModelState.IsValid)
+            {
+                topic.AuthorTopicId = User.Identity.GetUserId();
+                db.Topics.Add(topic);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(topic);
+        }
+
+
+
+
+
         // GET: /Topic/Details/5
         public ActionResult Details(int? id)
         {
@@ -45,30 +74,7 @@ namespace MyMVCForum.Controllers
             return View(topic);
         }
 
-        // GET: /Topic/Create
-        [Authorize]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Topic/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="TopicID,TopicName")] Topic topic)
-        {
-            if (ModelState.IsValid)
-            {
-                topic.AuthorTopicId = User.Identity.GetUserId(); 
-                db.Topics.Add(topic);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(topic);
-        }
+       
 
         // GET: /Topic/Edit/5
         public ActionResult Edit(int? id)

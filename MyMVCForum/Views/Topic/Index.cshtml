@@ -1,7 +1,7 @@
 ﻿@model MyMVCForum.Models.Topic
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.TopicName;
 }
 
 <h2>@Html.DisplayFor(model => model.TopicName)</h2>
@@ -29,33 +29,4 @@
         
     </table>
 
-    <h4>Topic</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TopicName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TopicName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DatePost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DatePost)
-        </dd>
-        <dd>
-           @foreach (var item in Model.Posts)
-           {
-               @Html.DisplayFor(Item => item.PostText)
-           }
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TopicID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

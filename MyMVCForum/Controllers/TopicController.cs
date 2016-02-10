@@ -16,9 +16,18 @@ namespace MyMVCForum.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /Topic/
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Topics.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topic topic = db.Topics.Find(id);
+            if (topic == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topic);
         }
 
         // GET: /Topic/Details/5

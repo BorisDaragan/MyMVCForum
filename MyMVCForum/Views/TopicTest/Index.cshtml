@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MyMVCForum.Models.Topic>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicName)
+        </td>
+        @*test GetUserId*@
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorTopic.UserName)
+        </td>  
+        <td>
+            @Html.DisplayFor(modelItem => item.DatePost)
+        </td>  
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TopicID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TopicID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TopicID })
+        </td>
+    </tr>
+}
+
+</table>

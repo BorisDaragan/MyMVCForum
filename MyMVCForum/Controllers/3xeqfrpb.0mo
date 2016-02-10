@@ -15,7 +15,7 @@ namespace MyMVCForum.Controllers
     public class TopicController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private static int? inTopicId;
+        private int TopicId;
 
         // GET: /Topic/
         public ActionResult Index(int? id)
@@ -29,7 +29,6 @@ namespace MyMVCForum.Controllers
             {
                 return HttpNotFound();
             }
-            inTopicId = id;
             return View(topic);
         }
 
@@ -37,12 +36,9 @@ namespace MyMVCForum.Controllers
         //To do: create ViewModel
         // GET: /Topic/Create
         [Authorize]
-        public ActionResult Reply(int? id)
+        public ActionResult Reply(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            TopicId = id;
             return View();
         }
 
@@ -51,17 +47,19 @@ namespace MyMVCForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Reply(Post post) //[Bind(Include = "TopicID,TopicName")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply([Bind(Include = "TopicID,TopicName")] Post post)
         {
+            Debug.WriteLine("!!!!!!!!!!!");
             if (true) //ModelState.IsValid
             {
+                Debug.WriteLine("222!!!!!!!!!!!");
                 post.AuthorPostId = User.Identity.GetUserId();
-                post.TopicRefID = (int)inTopicId;
+                post.Topic = db.Topics.Find(TopicId) ;
 
                 db.Posts.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { id = inTopicId });
+                return RedirectToAction("Index");
             }
             return View(post);
         }

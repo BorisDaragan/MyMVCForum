@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyMVCForum.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,21 @@ namespace MyMVCForum.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+        //
+        // GET: /Forum/
         public ActionResult Index()
         {
-            return View();
+            return View(db.Topics.ToList());
         }
 
-        public ActionResult About()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-    }
+	}
 }

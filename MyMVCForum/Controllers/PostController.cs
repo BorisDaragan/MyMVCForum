@@ -60,7 +60,7 @@ namespace MyMVCForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                post.AuthorPostId = User.Identity.GetUserId(); ;
+                post.AuthorPostId = User.Identity.GetUserId(); 
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");

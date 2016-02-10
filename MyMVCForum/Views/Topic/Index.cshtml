@@ -22,6 +22,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.TopicName)
         </td>
+        @*test GetUserId*@
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorTopic.UserName)
+        </td>  
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TopicID }) |
             @Html.ActionLink("Details", "Details", new { id=item.TopicID }) |

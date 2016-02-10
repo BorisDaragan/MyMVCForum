@@ -11,12 +11,21 @@
 	<hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.AuthorTopic.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthorTopic.UserName)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.TopicName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TopicName)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.DatePost)
         </dt>

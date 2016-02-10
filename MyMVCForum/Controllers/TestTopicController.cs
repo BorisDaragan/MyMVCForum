@@ -11,17 +11,18 @@ using Microsoft.AspNet.Identity;
 
 namespace MyMVCForum.Controllers
 {
-    public class TopicController : Controller
+    public class TestTopicController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: /Topic/
+        // GET: /TestTopic/
         public ActionResult Index()
         {
-            return View(db.Topics.ToList());
+            var topics = db.Topics.Include(t => t.AuthorTopic);
+            return View(topics.ToList());
         }
 
-        // GET: /Topic/Details/5
+        // GET: /TestTopic/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,12 +37,12 @@ namespace MyMVCForum.Controllers
             return View(topic);
         }
 
-        // GET: /Topic/Create
+        // GET: /TestTopic/Create
         public ActionResult Create()
         {
             if (User.Identity.IsAuthenticated)
             {
-            return View();
+                return View();
             }
             else
             {
@@ -49,16 +50,16 @@ namespace MyMVCForum.Controllers
             }
         }
 
-        // POST: /Topic/Create
+        // POST: /TestTopic/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="TopicID,TopicName")] Topic topic)
+        public ActionResult Create([Bind(Include = "TopicID,TopicName")] Topic topic)
         {
             if (ModelState.IsValid)
             {
-                topic.AuthorTopicId = User.Identity.GetUserId(); 
+                topic.AuthorTopicId = User.Identity.GetUserId();
                 db.Topics.Add(topic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -66,7 +67,7 @@ namespace MyMVCForum.Controllers
             return View(topic);
         }
 
-        // GET: /Topic/Edit/5
+        // GET: /TestTopic/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,15 +79,16 @@ namespace MyMVCForum.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AuthorTopicId = new SelectList(db.IdentityUsers, "Id", "UserName", topic.AuthorTopicId);
             return View(topic);
         }
 
-        // POST: /Topic/Edit/5
+        // POST: /TestTopic/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="TopicID,TopicName")] Topic topic)
+        public ActionResult Edit([Bind(Include="TopicID,TopicName,DatePost,AuthorTopicId")] Topic topic)
         {
             if (ModelState.IsValid)
             {
@@ -94,10 +96,11 @@ namespace MyMVCForum.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AuthorTopicId = new SelectList(db.IdentityUsers, "Id", "UserName", topic.AuthorTopicId);
             return View(topic);
         }
 
-        // GET: /Topic/Delete/5
+        // GET: /TestTopic/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,7 +115,7 @@ namespace MyMVCForum.Controllers
             return View(topic);
         }
 
-        // POST: /Topic/Delete/5
+        // POST: /TestTopic/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
